@@ -1,5 +1,5 @@
-# 1. 基础镜像
-FROM php:8.3-cli
+# 1. 基础镜像：升级为 8.4 (支持 PHP 8.4/8.5 的 Property Hooks 等新语法)
+FROM php:8.4-cli
 
 # 2. 安装系统依赖和 PHP 核心扩展
 RUN apt-get update && apt-get install -y \
@@ -23,14 +23,14 @@ WORKDIR /var/www/html
 # 5. 复制项目代码
 COPY . .
 
-# 6. 安装依赖 (关键：加入 --no-scripts 避免在 Build 阶段触发 Package Discover 报错)
+# 6. 安装依赖
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs --no-scripts
 
 # 7. 暴露端口
 EXPOSE 10000
 
-# 8. 启动命令：在运行时（已注入环境变量）依次执行包发现、缓存清理、数据库迁移和启动服务
+# 8. 启动服务
 CMD php artisan package:discover --ansi && \
     php artisan config:clear && \
     php artisan route:cache && \
