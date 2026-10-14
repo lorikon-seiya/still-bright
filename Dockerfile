@@ -1,7 +1,7 @@
 # 1. 基础镜像
 FROM php:8.4-cli
 
-# 2. 安装系统依赖和 PHP 核心扩展
+# 2. 安装系统依赖和 PHP 核心扩展（增加了 libicu-dev 和 intl）
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -12,7 +12,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libpq-dev \
     libzip-dev \
-    && docker-php-ext-install pdo pdo_pgsql pdo_mysql mbstring exif pcntl bcmath gd zip
+    libicu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install pdo pdo_pgsql pdo_mysql mbstring exif pcntl bcmath gd zip intl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # 3. 安装 Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
