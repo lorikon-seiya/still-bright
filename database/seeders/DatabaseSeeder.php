@@ -14,13 +14,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. 自动创建后台管理员账号 (如果不存在则创建)
-        User::firstOrCreate(
-            ['email' => 'mio@mio.mio'], // 登录邮箱
-            [
-                'name' => 'mio',
-                'password' => Hash::make('123456789'), // 登录密码 (设为你喜欢的密码)
-            ]
-        );
+        // User::firstOrCreate(
+        //     ['email' => 'mio@mio.mio'], // 登录邮箱
+        //     [
+        //         'name' => 'mio',
+        //         'password' => Hash::make('123456789'), // 登录密码 (设为你喜欢的密码)
+        //     ]
+        // );
 
         // 1. 先创建 4 个经典分类
         $categories = collect([

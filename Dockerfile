@@ -1,5 +1,5 @@
-# 1. 基础镜像：升级为 8.4 (支持 PHP 8.4/8.5 的 Property Hooks 等新语法)
-FROM php:8.4-cli
+# 1. 基础镜像
+FROM php:8.3-cli
 
 # 2. 安装系统依赖和 PHP 核心扩展
 RUN apt-get update && apt-get install -y \
@@ -30,10 +30,12 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-pl
 # 7. 暴露端口
 EXPOSE 10000
 
-# 8. 启动服务
-CMD php artisan package:discover --ansi && \
+# 8. 启动命令：每次启动自动建表、自动创建管理员、清理缓存并启动服务
+CMD php artisan storage:link && \
+    php artisan package:discover --ansi && \
     php artisan config:clear && \
-    php artisan route:cache && \
-    php artisan view:cache && \
+    php artisan route:clear && \
+    php artisan view:clear && \
     php artisan migrate --force && \
+    php artisan db:seed --class=AdminUserSeeder --force && \
     php artisan serve --host=0.0.0.0 --port=${PORT:-10000}
