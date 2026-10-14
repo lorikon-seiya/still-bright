@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 
 use App\Models\Post;
 use Spatie\Sitemap\Sitemap;
@@ -11,6 +12,19 @@ use Spatie\Sitemap\Tags\Url;
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
 // 文章详情页
 Route::get('/posts/{slug}', [PostController::class, 'show'])->name('posts.show');
+
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
 
 // 2. 自动挂载 RSS 订阅路由 (/feed)
 Route::feeds();
@@ -31,3 +45,6 @@ Route::get('/sitemap.xml', function () {
     });
     return $sitemap->toResponse(request());
 });
+
+
+require __DIR__ . '/auth.php';

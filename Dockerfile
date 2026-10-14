@@ -1,5 +1,5 @@
 # 1. 基础镜像
-FROM php:8.3-cli
+FROM php:8.4-cli
 
 # 2. 安装系统依赖和 PHP 核心扩展
 RUN apt-get update && apt-get install -y \
