@@ -14,6 +14,8 @@
             <a href="{{ route('posts.index') }}" class="text-sm font-medium text-gray-700 hover:text-swift transition-colors">
                 Home
             </a>
+            <!-- 加上这一行 -->
+            <a href="{{ route('questions.index') }}" class="text-sm font-medium text-gray-700 hover:text-swift">Questions</a>
 
             <!-- 权限与认证状态判断 -->
             @if (Auth::user())

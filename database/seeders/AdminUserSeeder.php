@@ -15,7 +15,7 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         User::firstOrCreate(
-            ['email' => env('ADMIN_EMAIL', 'mio@mio,mio')], // 登录邮箱
+            ['email' => env('ADMIN_EMAIL', 'mio@mio.mio')], // 登录邮箱
             [
                 'name' => env('ADMIN_NAME', 'mio'),
                 'password' => Hash::make(env('ADMIN_PASSWORD', '123456789')), // 登录密码 (设为你喜欢的密码)

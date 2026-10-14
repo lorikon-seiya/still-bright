@@ -8,9 +8,9 @@
 
         <!-- 页面头部标题 -->
         <div class="border-b border-gray-200/80 pb-5">
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">个人设置</h1>
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">Settings</h1>
             <p class="text-sm text-gray-500 mt-1.5">
-                管理你的 SwiftHub 账号资料、登录密码及安全偏好。
+                Manage your SwiftHub account information, login password, and security preferences.
             </p>
         </div>
 

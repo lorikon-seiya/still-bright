@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\QuestionController;
+
 
 use App\Models\Post;
 use Spatie\Sitemap\Sitemap;
@@ -23,6 +26,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// 问答广场与详情
+Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');
+Route::get('/questions/{slug}', [QuestionController::class, 'show'])->name('questions.show');
+// 需要登录后才能操作的动作 (提问、写回答、采纳)
+Route::middleware('auth')->group(function () {
+    Route::get('/ask', [QuestionController::class, 'create'])->name('questions.create');
+    Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
+    Route::post('/questions/{question}/answers', [AnswerController::class, 'store'])->name('answers.store');
+    Route::post('/questions/{question}/answers/{answer}/best', [AnswerController::class, 'markBest'])->name('answers.best');
 });
 
 

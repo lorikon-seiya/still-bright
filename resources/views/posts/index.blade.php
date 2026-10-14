@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '首页 - Swift 学习博客')
+@section('title', 'Home')
 
 @section('content')
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -8,10 +8,10 @@
     <!-- Hero 标语块 -->
     <div class="text-center py-10">
         <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
-            探索 <span class="text-swift">Swift</span> & <span class="text-blue-500">SwiftUI</span> 的无限可能
+            Exploring <span class="text-swift">Swift</span> & <span class="text-blue-500">SwiftUI</span>
         </h1>
         <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-            记录 Swift 6.0、SwiftUI、SwiftData 与 iOS 18 高级开发的实战心得与原理剖析。
+            Practical Insights and Core Principles of Advanced iOS 18, Swift 6.0, and SwiftData Development.
         </p>
     </div>
 
